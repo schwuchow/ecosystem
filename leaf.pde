@@ -1,7 +1,7 @@
 class Leaf extends MovingBeing {
    
-   Leaf(PVector _location, PVector _velocity, PVector _acceleration, float _mass, float _topspeed) {
-    super(_location, _velocity, _acceleration, _mass, _topspeed);
+   Leaf() {
+    super();
    }
    
   void update() {     

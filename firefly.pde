@@ -2,8 +2,8 @@ class Firefly extends MovingBeing {
   
   //float tx, ty;
   
-  Firefly(PVector _location, PVector _velocity, PVector _acceleration, float _mass, float _topspeed) {
-    super(_location, _velocity, _acceleration, _mass, _topspeed);
+  Firefly() {
+    //super();
   // tx = 0;
   // ty = 10000;
   }

@@ -20,78 +20,82 @@ void setup() {
    background(213, 229, 245);
    
    liquid = new Liquid(0, height/2, width, height, 1);
- 
-   
+
   // fireflies
   for (int i = 0; i < fireflies.length; i++) {
-    fireflies[i] = new Firefly(new PVector(random(width), random(height)), 
-                               new PVector(0,0),
-                               new PVector(0,0),
-                               1,
-                               4);
+    fireflies[i] = new Firefly();
+    fireflies[i]
+    .atLocation(new PVector(random(width), random(height)))
+    .withVelocity(new PVector(0, 0))
+    .withAcceleration(new PVector(0, 0))
+    .withMass(1)
+    .withTopSpeed(4);
   }
   
   for (int i = 0; i < bees.length; i++) {
-     bees[i] = new Bee(new PVector(random(width), random(height)),
-                       new PVector(0,0),
-                       new PVector(1,1),
-                       1, 
-                       7); 
+     bees[i] = new Bee();
+     bees[i]
+       .atLocation(new PVector(random(width), random(height)))
+       .withAcceleration(new PVector(1,1))
+       .withTopSpeed(7);
   }
   
   beehive = new Beehive();
   flower = new Flower();
   
-  bird = new Bird();
-  waterlily = new WaterLily(new PVector(random(width), random(height)),
-                            new PVector(random(width), random(height)),
-                            new PVector(0,0),
-                            1,
-                            0.3);
-  leaf = new Leaf(new PVector(random(width), random(height)),
-                  new PVector(0, random(height)),
-                  new PVector(0,0),
-                  1,
-                  0.5);
+  waterlily = new WaterLily();
+  waterlily
+    .atLocation(new PVector(random(width), random(height)))
+    .withVelocity(new PVector(random(width), random(height)))
+    .withTopSpeed(1);
+    
+    
+  leaf = new Leaf();
+  leaf
+    .atLocation(new PVector(random(width), random(height)))
+    .withVelocity(new PVector(0, random(height)))
+    .withTopSpeed(0.5);
+  
+  /*bird = new Bird();*/
 }
 
 void draw() {
    background(213, 229, 245);
    
-   liquid.display();
-   beehive.display();
+   //liquid.display();
+   //beehive.display();
      
-   /*for (int i = 0; i < fireflies.length; i++) {
+   for (int i = 0; i < fireflies.length; i++) {
       fireflies[i].update();
       fireflies[i].checkEdges();
       fireflies[i].display();
-   }*/
+   }
    
-   /*for (int i = 0; i < bees.length; i++) {
+   for (int i = 0; i < bees.length; i++) {
       PVector force = beehive.attract(bees[i]);
       bees[i].applyForce(force);
       bees[i].update();
       bees[i].display();
-   }*/
+   }
    
    /*bird.update();
    bird.checkEdges();
    bird.display();*/
    
-   /*waterlily.applyForce(wind);
+   waterlily.applyForce(wind);
    waterlily.update();
    waterlily.checkEdges();
-   waterlily.display();*/
+   waterlily.display();
    
-   if (leaf.isInside(liquid)) {
+   /*if (leaf.isInside(liquid)) {
      leaf.drag(liquid);
-   }
+   }*/
    
-   leaf.applyForce(wind);
+   /*leaf.applyForce(wind);
    leaf.applyForce(gravity);
    leaf.update();
    leaf.checkEdges();
-   leaf.display();
+   leaf.display();*/
    
    /*flower.update();
    flower.display();*/

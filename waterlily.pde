@@ -4,8 +4,8 @@ class WaterLily extends MovingBeing{
   float aVelocity = 0;
   float aAcceleration = 0;
   
-  WaterLily(PVector _location, PVector _velocity, PVector _acceleration, float _mass, float _topspeed) {
-    super(_location, _velocity, _acceleration, _mass, _topspeed);
+  WaterLily() {
+    super();
   }
   
   void update() {     

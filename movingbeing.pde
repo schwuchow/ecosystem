@@ -6,12 +6,37 @@ abstract class MovingBeing {
   float mass;
   float topspeed;
   
-  MovingBeing(PVector _location, PVector _velocity, PVector _acceleration, float _mass, float _topspeed) {
-    location = _location;
-    velocity = _velocity;
-    acceleration = _acceleration;
-    mass = _mass;
-    topspeed = _topspeed;
+  MovingBeing() {
+    this.location = new PVector(0,0);
+    this.velocity = new PVector(0,0);
+    this.acceleration = new PVector(0,0);
+    this.mass = 1;
+    this.topspeed = 1;
+  }  
+  
+  MovingBeing atLocation(PVector location) {
+    this.location = location;
+    return this;
+  }
+  
+  MovingBeing withVelocity(PVector velocity) {
+    this.velocity = velocity;
+    return this;
+  }
+  
+  MovingBeing withAcceleration(PVector acceleration) {
+    this.acceleration = acceleration;
+    return this;
+  }
+  
+  MovingBeing withMass(float mass) {
+    this.mass = mass;
+    return this;
+  }
+  
+  MovingBeing withTopSpeed(float topspeed) {
+    this.topspeed = topspeed;
+    return this;
   }
   
   abstract void update();
@@ -21,7 +46,7 @@ abstract class MovingBeing {
   // F = M * A
   // A = F/M
   void applyForce(PVector force) {
-   PVector f = force.get();
+   PVector f = force.copy();
    f.div(mass);
    acceleration.add(f);
   }
@@ -40,7 +65,7 @@ abstract class MovingBeing {
   void drag(Liquid l) {
     float speed = velocity.mag();
     float dragMagnitude = l.C_drag * speed * speed;
-    PVector drag = velocity.get();
+    PVector drag = velocity.copy();
     drag.mult(-0.5);
     drag.normalize();
     drag.mult(dragMagnitude);
