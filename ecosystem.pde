@@ -3,10 +3,11 @@ Firefly[] fireflies = new Firefly[20];
 Bee[] bees = new Bee[5];
 Bird bird;
 WaterLily waterlily;
-Leaf leaf;
+Leaf[] leaves = new Leaf[5];
 Flower flower;
 
 Liquid liquid;
+int[] inLiquidTime = new int[leaves.length];
 Beehive beehive;
 
 // made up TODO see 2.5
@@ -19,7 +20,11 @@ void setup() {
    fullScreen();
    background(213, 229, 245);
    
-   liquid = new Liquid(0, height/2, width, height, 1);
+   liquid = new Liquid(0, height/3, width, height/2, 0.3);
+
+   for (int i = 0; i < inLiquidTime.length; i++) {
+     inLiquidTime[i] = 0;
+   }
 
   // fireflies
   for (int i = 0; i < fireflies.length; i++) {
@@ -49,12 +54,13 @@ void setup() {
     .withVelocity(new PVector(random(width), random(height)))
     .withTopSpeed(1);
     
-    
-  leaf = new Leaf();
-  leaf
-    .atLocation(new PVector(random(width), random(height)))
-    .withVelocity(new PVector(0, random(height)))
-    .withTopSpeed(0.5);
+  for (int i = 0; i < leaves.length; i++) {
+    leaves[i] = new Leaf();
+    leaves[i]
+      .atLocation(new PVector(random(width), random(height/3)))
+      .withVelocity(new PVector(0, random(height)))
+      .withTopSpeed(2);
+  }
   
   /*bird = new Bird();*/
 }
@@ -62,10 +68,10 @@ void setup() {
 void draw() {
    background(213, 229, 245);
    
-   //liquid.display();
+   liquid.display();
    //beehive.display();
      
-   for (int i = 0; i < fireflies.length; i++) {
+   /*for (int i = 0; i < fireflies.length; i++) {
       fireflies[i].update();
       fireflies[i].checkEdges();
       fireflies[i].display();
@@ -76,7 +82,7 @@ void draw() {
       bees[i].applyForce(force);
       bees[i].update();
       bees[i].display();
-   }
+   }*/
    
    /*bird.update();
    bird.checkEdges();
@@ -87,15 +93,33 @@ void draw() {
    waterlily.checkEdges();
    waterlily.display();
    
-   /*if (leaf.isInside(liquid)) {
-     leaf.drag(liquid);
-   }*/
+   for (int i = 0; i < leaves.length; i++) {
+     boolean disappearInLiquid = false;
+    
+     if (liquid.contains(leaves[i])) {
+       PVector dragForce = liquid.drag(leaves[i]);
+       leaves[i].applyForce(dragForce);
+       inLiquidTime[i]++;
+     
+       if (inLiquidTime[i] > 50) {
+         disappearInLiquid = true;
+       }
+     }
    
-   /*leaf.applyForce(wind);
-   leaf.applyForce(gravity);
-   leaf.update();
-   leaf.checkEdges();
-   leaf.display();*/
+     if (!disappearInLiquid) {
+       leaves[i].applyForce(wind);
+       PVector leafGravity = new PVector(0, 0.1 * leaves[i].mass);
+       leaves[i].applyForce(leafGravity);
+       leaves[i].update();
+       leaves[i].checkEdges();
+
+       if (liquid.contains(leaves[i])) {
+        leaves[i].displayUnderWater();
+       } else {
+        leaves[i].display();
+       }
+     }
+   }
    
    /*flower.update();
    flower.display();*/
@@ -104,7 +128,6 @@ void draw() {
 /*
 Ideas
 flowers with circulating petals
-leaves that fall down and disappear after entering water
 fishes
 an island with a rabbit
 bees that are flying around their stock

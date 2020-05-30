@@ -51,28 +51,6 @@ abstract class MovingBeing {
    acceleration.add(f);
   }
   
-  // Drag force / fluid resistance as a form of friction
-  // formula:
-  // F_drag = -1/2 * p * v^2 * A * C_d * ^v
-  // with 
-  // p = 1 (density of liquid)
-  // v = speed/magnitude of velocity
-  // A = 1 (frontal area that is pushing through liquid)
-  // C_d = drag constant which determines strength
-  // ^v = normalized speed
-  // ==> simplified formula:
-  // F_drag = -1/2 * v^2 * C_d * ^v
-  void drag(Liquid l) {
-    float speed = velocity.mag();
-    float dragMagnitude = l.C_drag * speed * speed;
-    PVector drag = velocity.copy();
-    drag.mult(-0.5);
-    drag.normalize();
-    drag.mult(dragMagnitude);
-    
-    applyForce(drag);
-  }
-  
   boolean isInside(Liquid l) {
    if (location.x > l.x && location.x < l.x+l.w && 
        location.y > l.y && location.y < l.y+l.h) {
