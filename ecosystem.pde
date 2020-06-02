@@ -68,7 +68,7 @@ void setup() {
   wave = new Wave();
   butterfly = new Butterfly();
   butterfly
-       .withAcceleration(new PVector(1,1))
+       .atLocation(new PVector(random(width), random(height)))
        .withTopSpeed(7);
 }
 
@@ -134,6 +134,7 @@ void draw() {
    //wave.display();
    butterfly.update();
    butterfly.display();
+   butterfly.checkEdges();
 }
 
 /*
