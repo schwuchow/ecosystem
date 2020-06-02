@@ -51,15 +51,6 @@ abstract class MovingBeing {
    acceleration.add(f);
   }
   
-  boolean isInside(Liquid l) {
-   if (location.x > l.x && location.x < l.x+l.w && 
-       location.y > l.y && location.y < l.y+l.h) {
-     return true;
-   } else {
-     return false; 
-   }
-  }
-  
   void checkEdges() {
      if (location.x > width) {
        location.x = 0;

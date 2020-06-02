@@ -5,6 +5,8 @@ Bird bird;
 WaterLily waterlily;
 Leaf[] leaves = new Leaf[5];
 Flower flower;
+Wave wave;
+Butterfly butterfly;
 
 Liquid liquid;
 int[] inLiquidTime = new int[leaves.length];
@@ -62,31 +64,36 @@ void setup() {
       .withTopSpeed(2);
   }
   
-  /*bird = new Bird();*/
+  bird = new Bird();
+  wave = new Wave();
+  butterfly = new Butterfly();
+  butterfly
+       .withAcceleration(new PVector(1,1))
+       .withTopSpeed(7);
 }
 
 void draw() {
    background(213, 229, 245);
    
    liquid.display();
-   //beehive.display();
+   beehive.display();
      
    /*for (int i = 0; i < fireflies.length; i++) {
       fireflies[i].update();
       fireflies[i].checkEdges();
       fireflies[i].display();
-   }
+   }*/
    
    for (int i = 0; i < bees.length; i++) {
       PVector force = beehive.attract(bees[i]);
       bees[i].applyForce(force);
       bees[i].update();
       bees[i].display();
-   }*/
+   }
    
-   /*bird.update();
+   bird.update();
    bird.checkEdges();
-   bird.display();*/
+   bird.display();
    
    waterlily.applyForce(wind);
    waterlily.update();
@@ -121,19 +128,32 @@ void draw() {
      }
    }
    
-   /*flower.update();
-   flower.display();*/
+   flower.update();
+   flower.display();
+   
+   //wave.display();
+   butterfly.update();
+   butterfly.display();
 }
 
 /*
 Ideas
 flowers with circulating petals
-fishes
-an island with a rabbit
-bees that are flying around their stock
+fishes that move in oscillating fashion
+repulsion force
+make sth draggable
+an island with a rabbit as a curve
 bees that fly to flowers
 flowers that bend because of wind
 butterfly that flaps wings
 dragon-fly that wants to catch a fly
+torque & moment of inertia for angle acceleration
 waves
+beginShape/EndShape + vertex fn to draw more complex forms
+use mouse if else to toggle sth
+mousePressed
+mouseButton to navigate
+keypressed & key
+mouseDragged
+noloop & loop
 */

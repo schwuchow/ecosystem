@@ -10,7 +10,7 @@ class Flower {
    float yFromPolar;
   
    Flower() {
-     x = 100;
+     x = 200;
      y = 300;
      r = 20;
      theta = 2*PI;
@@ -31,18 +31,20 @@ class Flower {
   
    void display() {
      
-     // middle
-     stroke(181, 170, 22);
-     fill(235, 222, 52);
-     ellipse(x, y, 20, 20);
-     
      // stem
      fill(48, 140, 81);
      stroke(35, 209, 122);
      rect(x-2.5, y+20, 5, 50);
      
+     // middle
+     stroke(181, 170, 22);
+     fill(235, 222, 52);
+     ellipse(x, y, 20, 20);
+
      // leaf
-     ellipse(x-2.5-15, y+45, 30, 10);
+     fill(48, 140, 81);
+     stroke(48, 140, 81);
+     ellipse(x-2.5-15, y+30, 30, 10);
      
      // petal 1
      stroke(68, 11, 77);
@@ -50,9 +52,9 @@ class Flower {
      ellipse(x+xFromPolar, y+yFromPolar, 10, 10);
      
      // petal 2
-     /*stroke(242, 203, 247);
+     stroke(242, 203, 247);
      fill(235, 158, 247);
-     ellipse(x-10+xFromPolar, y-10+yFromPolar, 10, 10);*/
+     ellipse(x-xFromPolar, y-yFromPolar, 10, 10);
    }
   
 }

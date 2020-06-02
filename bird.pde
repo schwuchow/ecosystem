@@ -32,8 +32,12 @@ class Bird {
    rectMode(CENTER);
    pushMatrix();
    translate(location.x, location.y);
-   rotate(angle);
-   ellipse(0, 0, 35, 16);
+   rotate(angle+PI);
+   beginShape();
+   vertex(0, 0);
+   vertex(30, 10);
+   vertex(30,-10);
+   endShape();
    popMatrix();
   }
   

@@ -5,10 +5,6 @@ class Bee extends MovingBeing {
   }
   
   void update() {
-   /*acceleration = PVector.random2D();
-   acceleration.mult(0.1);
-   acceleration.mult(random(2));*/
-   
      velocity.add(acceleration);
      velocity.limit(topspeed);
      location.add(velocity);

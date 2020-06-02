@@ -5,8 +5,8 @@ class Beehive {
    
    Beehive() {
       location = new PVector(width/2, height/4);
-      mass = 1;
-      G = 100;
+      mass = 100;
+      G = 1;
    }
    
    void display() {
