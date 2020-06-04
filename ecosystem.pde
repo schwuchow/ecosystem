@@ -11,6 +11,7 @@ Butterfly butterfly;
 Liquid liquid;
 int[] inLiquidTime = new int[leaves.length];
 Beehive beehive;
+Tree tree;
 
 // made up TODO see 2.5
 // gravity should be according to mass, so that smaller objects don't fall faster see 2.6
@@ -70,6 +71,8 @@ void setup() {
   butterfly
        .atLocation(new PVector(random(width), random(height)))
        .withTopSpeed(7);
+
+  tree = new Tree();
 }
 
 void draw() {
@@ -132,9 +135,11 @@ void draw() {
    flower.display();
    
    //wave.display();
-   butterfly.update();
+   /*butterfly.update();
    butterfly.display();
-   butterfly.checkEdges();
+   butterfly.checkEdges();*/
+
+   tree.display();
 }
 
 /*
